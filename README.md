@@ -35,3 +35,20 @@ order by total_medals desc;
 ````
 <!--  used dense_rank so no rank number will be skipped
 order by added at the end of the query, not within the CTE so it will run in SSMS -->
+### 3. Total gold, silver and bronze won by each country
+````sql
+select country, coalesce(gold, 0) as gold, coalesce(silver, 0) as silver, coalesce(bronze, 0) as bronze
+from (
+    select nr.region AS country, medal, COUNT(1) AS total_medals
+    from athlete_events AS ae
+    join noc_regions AS nr 
+	on ae.noc = nr.noc
+    where medal <> 'NA'
+    group by nr.region, medal
+	) as sourcetable
+pivot (
+    max(total_medals)
+    for medal IN ([Bronze], [Gold], [Silver])
+) as PivotTable
+order by gold desc, silver desc, bronze desc
+````
