@@ -50,5 +50,5 @@ pivot (
     max(total_medals)
     for medal IN ([Bronze], [Gold], [Silver])
 ) as PivotTable
-order by gold desc, silver desc, bronze desc
+order by gold desc, silver desc, bronze desc;
 ````
