@@ -20,9 +20,6 @@ where no_of_games = 29;
 ````
 ### 2. Top 5 athletes with most gold medals won
 ````sql
-<!--  used dense_rank so no rank number will be skipped
-order by added at the end of the query, not within the CTE so it will run in SSMS -->
-
 with t1 as
 	(select name, count(1) as total_medals
 	from athlete_events
@@ -36,3 +33,5 @@ from t2
 where rnk <= 5
 order by total_medals desc;
 ````
+<!--  used dense_rank so no rank number will be skipped
+order by added at the end of the query, not within the CTE so it will run in SSMS -->
