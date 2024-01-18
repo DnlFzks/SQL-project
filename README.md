@@ -1,6 +1,6 @@
 # SQL-project#1 - Olympics
 
-### 1. What sport was played during all summper olympics?
+### 1. What sport was played during all summer olympics?
 ````sql
 with t1 as
 	(select count(distinct games) as total_summer_games
